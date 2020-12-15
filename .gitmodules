@@ -1,0 +1,3 @@
+[submodule "NPlib"]
+	path = NPlib
+	url = https://github.com/NPEX-Ltd/NPlib.git
