@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/ant"/>
+	<classpathentry kind="lib" path="libs/NPLib-v0.7.1a.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
