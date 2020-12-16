@@ -1,22 +1,39 @@
 package np.reflect;
 
 import np.library.common.Logger;
-
-public class ReflectUtils {
+import np.library.exceptions.JuggledException;
+import java.lang.reflect.*;
+@SuppressWarnings({"unused", "deprecation"})
+public final class ReflectUtils {
 	private static Logger logger = Logger.CreateNew(ReflectUtils.class);
-	@SuppressWarnings({ "deprecation", "finally" })
-	public static <T> T Create(Class<T> clazz) {
+	
+	private ReflectUtils() {}
+	
+	public static int GetIntField(Class<?> clazz, String name, Object instance) {
+		try {
+			Field field = GetFieldByName(clazz, name);
+			return field.getInt(instance);
+		} catch (Exception ex) {
+			logger.Debug(ex);
+			return 0;
+		}
+	}
+	
+	public static <T> T Create(Class<T> clazz)
+	throws JuggledException {
 		try {
 			return clazz.newInstance();
-		} catch (ClassCastException ccex) {
-			logger.Warn(ccex);
-		} catch (IllegalAccessException ilex) {
-			logger.Warn(ilex);
-		} catch (InstantiationException inex) {
-			logger.Warn(inex);
-		} finally {
-			return null;
+		} catch (Exception ex) {
+			throw new JuggledException(ex);
+		}
+	}
+	
+	public static Field GetFieldByName(Class<?> clazz, String name)
+	throws JuggledException {
+		try {
+			return clazz.getField(name);
+		} catch (Exception ex) {
+			throw new JuggledException(ex);
 		}
 	}
 }
-
