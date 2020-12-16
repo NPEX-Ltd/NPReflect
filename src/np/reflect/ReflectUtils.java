@@ -1,26 +1,24 @@
 package np.reflect;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 import java.util.function.Consumer;
 
 import np.library.common.Logger;
 import np.library.exceptions.JuggledException;
 
-public class ReflectUtils {
+@SuppressWarnings({"unused", "deprecation"})
+public final class ReflectUtils {
+
 	private static Logger logger = Logger.CreateNew(ReflectUtils.class);
-	@SuppressWarnings({ "deprecation", "finally" })
-	public static <T> T Create(Class<T> clazz) {
+	
+	private ReflectUtils() {}
+	public static <T> T Create(Class<T> clazz)
+	throws JuggledException {
 		try {
 			return clazz.newInstance();
-		} catch (ClassCastException ccex) {
-			logger.Warn(ccex);
-		} catch (IllegalAccessException ilex) {
-			logger.Warn(ilex);
-		} catch (InstantiationException inex) {
-			logger.Warn(inex);
+		} catch (Exception ex) {
+			throw new JuggledException(ex);
 		}
-		
-		return null; //Should Be Unreachable
 	}
 	public static int GetIntFieldFromObject(String name, Object object) {
 		try {
@@ -51,5 +49,13 @@ public class ReflectUtils {
 				field.setAccessible(isPublic);
 			}
 	}
+	
+	public static Field GetFieldByName(Class<?> clazz, String name)
+	throws JuggledException {
+		try {
+			return clazz.getField(name);
+		} catch (Exception ex) {
+			throw new JuggledException(ex);
+		}
+	}
 }
-

@@ -31,6 +31,11 @@ public class ReflectUtilsTester {
 	public void FieldConsumer(Field field) {
 		System.out.println(field);
 	}
+	public void TestFields() {
+		TestClass test = new TestClass();
+		int dogCount = ReflectUtils.GetIntFieldFromObject("dogCount", test);
+		System.out.println("Dog Count: "+dogCount);
+	}
 	
 	public static class TestClass {
 		public TestClass() {}
