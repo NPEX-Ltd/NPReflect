@@ -5,7 +5,8 @@
 	<property name="doc" location="doc"/>
 	<property name="lib" location="libs"/>
 	<property name="NPLib" location="NPlib"/>
-	
+
+    <property file="build.properties"/>
 	<target name="clean">
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
@@ -25,4 +26,10 @@
 			</classpath>
 		</javac>
 	</target>
+
+    <target name="jar" depends="build-all">
+        <jar basedir="${build}" jarfile="${dist}/NPReflect-${revision}.jar">
+            <exclude name="**/*Test*.class"/>
+        </jar>
+    </target>
 </project>
