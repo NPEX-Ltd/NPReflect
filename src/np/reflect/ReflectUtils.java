@@ -1,6 +1,7 @@
 package np.reflect;
 
 import java.lang.reflect.*;
+import java.util.*;
 import java.util.function.Consumer;
 
 import np.library.common.Logger;
@@ -57,5 +58,13 @@ public final class ReflectUtils {
 		} catch (Exception ex) {
 			throw new JuggledException(ex);
 		}
+	}
+	
+	public static Class<?>[] GetTypes(Object... args) {
+		Class<?>[] list = new Class<?>[args.length];
+		for(int i = 0; i < list.length; i++) {
+			list[i] = args[i].getClass();
+		}
+		return list;
 	}
 }
