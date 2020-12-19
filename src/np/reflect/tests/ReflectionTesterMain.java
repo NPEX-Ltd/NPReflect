@@ -7,5 +7,6 @@ public class ReflectionTesterMain {
 		Tester.Test(ReflectUtilsTester.class);
 		Tester.Test(MethodWrapperTester.class);
 		Tester.Test(ClassWrapperTester.class);
+		Tester.Test(JavacTester.class);
 	} 
 }
